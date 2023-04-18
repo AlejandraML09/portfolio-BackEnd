@@ -13,33 +13,36 @@ import lombok.Setter;
 @Setter
 @Entity
 
-public class Educacion {
 
+public class Experiencia {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
     private Long id;
     @ManyToOne
     private Persona persona;
-    private String escuela;
-    private String titulo;
-    private Integer puntaje;
+    private String compania;
+    private String puesto;
+    private String jornada;
     private Date inicio;
     private Date fin;
-    private String escuela_image;
-    private String escuela_url;
-    
-    public Educacion() {
+    private String puesto_image;
+    private String puesto_url;
+
+    public Experiencia() {
     }
 
-    public Educacion(Persona persona, String escuela, String titulo, String carrera, Integer puntaje, Date inicio, Date fin) {
+    public Experiencia(Persona persona, String compania, String puesto, String jornada, Date inicio, Date fin) {
         this.persona = persona;
-        this.escuela = escuela;
-        this.titulo = titulo;
-        this.puntaje = puntaje;
+        this.compania = compania;
+        this.puesto = puesto;
+        this.jornada = jornada;
         this.inicio = inicio;
         this.fin = fin;
-        this.escuela_image = escuela_image;
-        this.escuela_url = escuela_url;
+        this.puesto_image = puesto_image;
+        this.puesto_url = puesto_url;
     }
+
+
+    
 }
