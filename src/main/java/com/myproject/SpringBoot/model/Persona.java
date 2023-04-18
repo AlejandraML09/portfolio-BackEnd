@@ -62,10 +62,4 @@ public class Persona {
         this.username = username;
         this.password = password;
     }
-
-  
-
- 
-    
-
 }

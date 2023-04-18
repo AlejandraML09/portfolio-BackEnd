@@ -1,4 +1,3 @@
-
 package com.myproject.SpringBoot.service;
 
 import com.myproject.SpringBoot.model.Persona;
@@ -10,16 +9,18 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PersonaService implements IPersonaService {
+
     @Autowired
     public PersonaRepository persoRepo;
+
     @Override
     public List<Persona> listarPersonas() {
-       return persoRepo.findAll();
+        return persoRepo.findAll();
     }
 
     @Override
     public void crearPersona(Persona per) {
-       persoRepo.save(per);
+        persoRepo.save(per);
     }
 
     @Override
@@ -31,10 +32,14 @@ public class PersonaService implements IPersonaService {
     public Persona buscarPersona(Long id) {
         return persoRepo.findById(id).orElse(null);
     }
-    
+
     @Override
     public Persona editarPersona(Persona per) {
         return persoRepo.save(per);
     }
-    
+
+    @Override
+    public Persona buscarPersonaPorUsername(String username) {
+        return persoRepo.findAle();
+    }
 }
