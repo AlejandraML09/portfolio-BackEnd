@@ -72,11 +72,14 @@ public class LoginController {
                     .setIssuedAt(new Date(time))
                     .setExpiration(new Date(time + 90000))
                     .claim("username", user.getUsername())
-//                    .claim("role", user.getRole().name())
+//                   .claim("role", user.getRole().name())
                     .claim("user_id", user.getId())
                     .signWith(SignatureAlgorithm.HS256, key)
                     .compact();
-            return ResponseEntity.ok(jwt);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("JWT", jwt);
+            String json = jsonObject.toString();
+            return ResponseEntity.ok(json);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }

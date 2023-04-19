@@ -35,6 +35,10 @@ public class Persona {
     private List<Educacion> educaciones;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Experiencia> experiencias;
+    @OneToMany (cascade = CascadeType.ALL)
+    private List<Skills> skills;
+     @OneToMany (cascade = CascadeType.ALL)
+    private List<Proyectos> proyectos;
     private String banner_image;
     private String profile_picture;
     private String contacto;
