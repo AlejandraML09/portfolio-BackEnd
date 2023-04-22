@@ -73,6 +73,7 @@ public class LoginController {
                     .setExpiration(new Date(time + 90000))
                     .claim("username", user.getUsername())
 //                   .claim("role", user.getRole().name())
+                    .claim("profile_picture", user.getProfile_picture())
                     .claim("user_id", user.getId())
                     .signWith(SignatureAlgorithm.HS256, key)
                     .compact();

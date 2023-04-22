@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,14 +19,14 @@ public class Proyectos {
     private Long id;
     private String nombre_proyecto;
     private String descripcion;
-    private String fecha_inicio;
-    private String fecha_final;
+    private Date fecha_inicio;
+    private Date fecha_final;
     private String url;
 
     public Proyectos() {
     }
 
-    public Proyectos(String nombre_proyecto, String descripcion, String fecha_inicio, String fecha_final, String url) {
+    public Proyectos(String nombre_proyecto, String descripcion, Date fecha_inicio, Date fecha_final, String url) {
         this.nombre_proyecto = nombre_proyecto;
         this.descripcion = descripcion;
         this.fecha_inicio = fecha_inicio;
