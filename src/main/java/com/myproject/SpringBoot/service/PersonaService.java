@@ -40,6 +40,6 @@ public class PersonaService implements IPersonaService {
 
     @Override
     public Persona buscarPersonaPorUsername(String username) {
-        return persoRepo.findAle();
+        return persoRepo.findByUsername(username);
     }
 }

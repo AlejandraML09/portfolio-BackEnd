@@ -5,12 +5,6 @@ import com.myproject.SpringBoot.model.Persona;
 import com.myproject.SpringBoot.service.PersonaService;
 import java.util.Date;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.NewCookie;
-import javax.ws.rs.core.Response;
-
-
 import org.json.JSONObject;
 
 import io.jsonwebtoken.Jwts;
@@ -30,31 +24,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/auth")
-public class LoginController {
+public class AuthController {
     @Autowired
     private PersonaService personaService;
-
-   
-//    @PostMapping("/isAdmin")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public Response isAdmin(Long userId) {
-//        Persona user = this.userRepo.getById(userId);
-//
-//        if (user != null && user.getRole().equals(Role.ADMIN)) {
-//            return Response
-//                    .status(Response.Status.OK)
-//                    .build();
-//        } else {
-//            return Response
-//                    .status(Response.Status.UNAUTHORIZED)
-//                    .header("Access-Control-Allow-Origin", "*")
-//                    .build();
-//        }
-//    }
-
     
-    
+    @PostMapping("/register")
+    @ResponseBody 
+    public ResponseEntity<String> register(@RequestBody LoginRequest loginRequest) {
+        Persona user = this.personaService.buscarPersonaPorUsername(loginRequest.getUsername());
+        
+         if (user != null) {
+            return ResponseEntity.badRequest().build();
+        } 
+        Persona newUser = new Persona();
+        newUser.setUsername(loginRequest.getUsername());
+        newUser.setPassword(loginRequest.getPassword());
+        this.personaService.crearPersona(newUser);
+        return ResponseEntity.ok("");
+    }
+
     @PostMapping("/login")
     @ResponseBody
     public ResponseEntity<String> validate(@RequestBody LoginRequest loginRequest) {
