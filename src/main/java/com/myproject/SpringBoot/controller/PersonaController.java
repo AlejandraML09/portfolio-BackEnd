@@ -5,6 +5,7 @@ import com.myproject.SpringBoot.service.IPersonaService;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,8 +39,17 @@ public class PersonaController {
     }
 
     @GetMapping("/{id}")
-    public Persona Persona(@PathVariable Long id) {
-        return persoServ.buscarPersona(id);
+    public ResponseEntity<Persona> Persona(@PathVariable Long id) {
+        Persona pers = persoServ.buscarPersona(id);
+        if (pers == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(pers);
+        
+        }
+        
+                
+                
     }
 
     @DeleteMapping("/{id}")

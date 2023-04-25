@@ -63,6 +63,10 @@ public class AuthController {
 //                   .claim("role", user.getRole().name())
                     .claim("profile_picture", user.getProfile_picture())
                     .claim("user_id", user.getId())
+                    .claim("banner_image", user.getBanner_image())
+                    .claim("nombre", user.getNombre())
+                    .claim("apellido", user.getApellido())
+                    .claim("ocupacion", user.getOcupacion())
                     .signWith(SignatureAlgorithm.HS256, key)
                     .compact();
             JSONObject jsonObject = new JSONObject();
