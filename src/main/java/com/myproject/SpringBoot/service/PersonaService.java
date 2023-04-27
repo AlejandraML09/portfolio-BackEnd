@@ -35,6 +35,10 @@ public class PersonaService implements IPersonaService {
 
     @Override
     public Persona editarPersona(Persona per) {
+        Persona personaPersistida = this.buscarPersona(per.getId());
+        if (per.getPassword() == null && personaPersistida != null && personaPersistida.getPassword() != null){
+           per.setPassword(personaPersistida.getPassword());
+        }
         return persoRepo.save(per);
     }
 

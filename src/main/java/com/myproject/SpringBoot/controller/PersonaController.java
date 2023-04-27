@@ -47,9 +47,7 @@ public class PersonaController {
             return ResponseEntity.ok(pers);
         
         }
-        
-                
-                
+       
     }
 
     @DeleteMapping("/{id}")
