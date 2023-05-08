@@ -1,0 +1,12 @@
+com\myproject\SpringBoot\repository\PersonaRepository.class
+com\myproject\SpringBoot\service\IPersonaService.class
+com\myproject\SpringBoot\controller\AuthController.class
+com\myproject\SpringBoot\model\Skills.class
+com\myproject\SpringBoot\controller\PersonaController.class
+com\myproject\SpringBoot\Application.class
+com\myproject\SpringBoot\model\Proyectos.class
+com\myproject\SpringBoot\model\Persona.class
+com\myproject\SpringBoot\model\LoginRequest.class
+com\myproject\SpringBoot\model\Experiencia.class
+com\myproject\SpringBoot\service\PersonaService.class
+com\myproject\SpringBoot\model\Educacion.class
