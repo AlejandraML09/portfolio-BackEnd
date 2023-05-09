@@ -10,3 +10,4 @@ RUN echo "Env vars set"
 RUN echo "user $DB_USER"
 
 ENTRYPOINT ["java", "-jar", "/app.jar"]
+EXPOSE 8080
