@@ -14,4 +14,5 @@ public interface PersonaRepository extends JpaRepository<Persona, Long> {
     Persona findByUsername(String username);
      @Query("SELECT u FROM Persona u WHERE u.username = 'ale'")
     Persona findAle();
+  
 }

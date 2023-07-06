@@ -1,5 +1,6 @@
 package com.myproject.SpringBoot.service;
 
+import com.myproject.SpringBoot.model.Experiencia;
 import com.myproject.SpringBoot.model.Persona;
 import com.myproject.SpringBoot.repository.PersonaRepository;
 import java.util.List;
@@ -22,7 +23,7 @@ public class PersonaService implements IPersonaService {
     public void crearPersona(Persona per) {
         persoRepo.save(per);
     }
-
+    
     @Override
     public void borrarPersona(Long id) {
         persoRepo.deleteById(id);
@@ -45,5 +46,11 @@ public class PersonaService implements IPersonaService {
     @Override
     public Persona buscarPersonaPorUsername(String username) {
         return persoRepo.findByUsername(username);
+    }
+
+    @Override
+    public void guardarPersona(Persona pers) {
+       persoRepo.save(pers);
+       
     }
 }

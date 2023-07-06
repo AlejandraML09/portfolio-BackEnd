@@ -12,4 +12,5 @@ public interface IPersonaService {
     public Persona buscarPersona (Long id);
     public Persona editarPersona (Persona per);
     public Persona buscarPersonaPorUsername(String username);
+    public void guardarPersona(Persona pers);
 }
