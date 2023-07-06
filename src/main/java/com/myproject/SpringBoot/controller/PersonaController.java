@@ -1,12 +1,14 @@
 package com.myproject.SpringBoot.controller;
 
+import com.myproject.SpringBoot.model.Educacion;
 import com.myproject.SpringBoot.model.Experiencia;
 import com.myproject.SpringBoot.model.Persona;
 import com.myproject.SpringBoot.service.ExperienciaService;
+import com.myproject.SpringBoot.service.EducacionService;
 import com.myproject.SpringBoot.service.IPersonaService;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -32,39 +34,14 @@ public class PersonaController {
 
     @Autowired
     private ExperienciaService expServ;
+    
+    @Autowired
+    private EducacionService eduServ;
 
     @PostMapping
     public void agregarPersona(@RequestBody Persona pers) {
         persoServ.crearPersona(pers);
     }
-
-    @PostMapping("/{id}/experiencia")
-    public void agregarExperiencia(@PathVariable Long id, @RequestBody Experiencia exp) {
-         Persona pers = persoServ.buscarPersona(id);
-        if (pers != null) {
-            expServ.agregarExperiencia(exp);
-            List<Experiencia> experiencias = pers.getExperiencias();
-            experiencias.add(exp);
-            pers.setExperiencias(experiencias);
-            persoServ.guardarPersona(pers);
-        }
-           
-    }
-    
-    @DeleteMapping("/{userId}/experiencia/{experienciaId}")
-    public void eliminarExperiencia(@PathVariable Long userId, @PathVariable Long experienciaId ) {
-        Persona pers = persoServ.buscarPersona(userId);
-        if (pers != null) {
-            List<Experiencia> experiencias = pers.getExperiencias();
-            experiencias.removeIf(e -> e.getId().equals(experienciaId));
-            pers.setExperiencias(experiencias);
-            persoServ.guardarPersona(pers);
-            expServ.eliminarExperiencia(experienciaId);
-
-        }
-           
-    }
-
 
     @GetMapping
     @ResponseBody
@@ -95,5 +72,60 @@ public class PersonaController {
         return persoServ.editarPersona(per);
 
     }
+    
+    @PostMapping("/{id}/experiencia")
+    public void agregarExperiencia(@PathVariable Long id, @RequestBody Experiencia exp) {
+         Persona pers = persoServ.buscarPersona(id);
+        if (pers != null) {
+            expServ.agregarExperiencia(exp);
+            List<Experiencia> experiencias = pers.getExperiencias();
+            experiencias.add(exp);
+            pers.setExperiencias(experiencias);
+            persoServ.guardarPersona(pers);
+        }
+           
+    }
+    
+    @DeleteMapping("/{userId}/experiencia/{experienciaId}")
+    public void eliminarExperiencia(@PathVariable Long userId, @PathVariable Long experienciaId ) {
+        Persona pers = persoServ.buscarPersona(userId);
+        if (pers != null) {
+            List<Experiencia> experiencias = pers.getExperiencias();
+            experiencias.removeIf(e -> e.getId().equals(experienciaId));
+            pers.setExperiencias(experiencias);
+            persoServ.guardarPersona(pers);
+            expServ.eliminarExperiencia(experienciaId);
+
+        }
+           
+    }
+    
+    @PostMapping("/{id}/educacion")
+    public void agregarEducacion (@PathVariable Long id, @RequestBody Educacion edu) {
+        Persona pers = persoServ.buscarPersona(id);
+        if (pers != null) {
+            eduServ.agregarEducacion(edu);
+            List<Educacion> educaciones = pers.getEducaciones();
+            educaciones.add(edu);
+            pers.setEducaciones(educaciones);
+            persoServ.guardarPersona(pers);
+        }
+           
+    }
+    
+     @DeleteMapping("/{userId}/educacion/{educacionId}")
+    public void eliminarEducacion(@PathVariable Long userId, @PathVariable Long educacionId ) {
+        Persona pers = persoServ.buscarPersona(userId);
+        if (pers != null) {
+            List<Educacion> educaciones = pers.getEducaciones();
+            educaciones.removeIf(e -> e.getId().equals(educacionId));
+            pers.setEducaciones(educaciones);
+            persoServ.guardarPersona(pers);
+            eduServ.eliminarEducacion(educacionId);
+
+        }
+           
+    }
+
 
 }
