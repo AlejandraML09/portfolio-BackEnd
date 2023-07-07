@@ -3,10 +3,12 @@ package com.myproject.SpringBoot.controller;
 import com.myproject.SpringBoot.model.Educacion;
 import com.myproject.SpringBoot.model.Experiencia;
 import com.myproject.SpringBoot.model.Persona;
+import com.myproject.SpringBoot.model.Proyectos;
 import com.myproject.SpringBoot.model.Skills;
 import com.myproject.SpringBoot.service.ExperienciaService;
 import com.myproject.SpringBoot.service.EducacionService;
 import com.myproject.SpringBoot.service.IPersonaService;
+import com.myproject.SpringBoot.service.ProyectoService;
 import com.myproject.SpringBoot.service.SkillService;
 
 import java.util.List;
@@ -42,6 +44,9 @@ public class PersonaController {
     
     @Autowired
     private SkillService skillServ;
+    
+    @Autowired
+    private ProyectoService proServ;
     
     @PostMapping
     public void agregarPersona(@RequestBody Persona pers) {
@@ -154,10 +159,38 @@ public class PersonaController {
             skills.removeIf(e -> e.getId().equals(skillId));
             pers.setSkills(skills);
             persoServ.guardarPersona(pers);
-            eduServ.eliminarEducacion(skillId);
+            skillServ.eliminarSkill(skillId);
 
         }
 
     }
+    
+         @PostMapping("/{id}/proyecto")
+    public void agregarSkill(@PathVariable Long id, @RequestBody Proyectos proyecto) {
+        Persona pers = persoServ.buscarPersona(id);
+        if (pers != null) {
+            proServ.agregarProyecto(proyecto);
+            List<Proyectos> proyectos = pers.getProyectos();
+            proyectos.add(proyecto);
+            pers.setProyectos(proyectos);
+            persoServ.guardarPersona(pers);
+        }
+
+    }
+    
+       @DeleteMapping("/{userId}/proyecto/{proyectoId}")
+        public void eliminarProyecto (@PathVariable Long userId, @PathVariable Long proyectoId) {
+        Persona pers = persoServ.buscarPersona(userId);
+        if (pers != null) {
+            List<Proyectos> proyectos = pers.getProyectos();
+            proyectos.removeIf(e -> e.getId().equals(proyectoId));
+            pers.setProyectos(proyectos);
+            persoServ.guardarPersona(pers);
+            proServ.eliminarProyecto(proyectoId);
+
+        }
+
+    }
+    
 
 }
